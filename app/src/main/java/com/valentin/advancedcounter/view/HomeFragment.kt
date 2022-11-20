@@ -5,6 +5,9 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgument
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
@@ -19,7 +22,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         counterRv.layoutManager = GridLayoutManager(activity, 2)
         observeData()
@@ -74,7 +76,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         return CounterVH.Builder()
             .setOnClickEventListener(::incrementCounter)
-            .setOnLongClickEventListener(::goToFragmentDetails)
+            .setOnLongClickEventListener(::navigateToSecondFirstFragment)
             .build()
+    }
+
+    private fun navigateToSecondFirstFragment(item: Counter) : Boolean {
+        Log.d("DEBUG_TAG", "Going to second first fragment")
+
+        //bundle
+        val bundle = Bundle()
+        bundle.putString("clicks_count", item.numberOfClicks.toString())
+
+        //nav argument
+//        val navArgument1= NavArgument.Builder().setDefaultValue("1").build()
+//        view?.findNavController()?.graph?.addArgument("key_1", navArgument1)
+
+
+        view?.findNavController()?.navigate(R.id.secondFirstFragment, bundle)
+
+        return true
     }
 }

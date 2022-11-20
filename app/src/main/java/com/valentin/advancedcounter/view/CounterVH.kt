@@ -21,7 +21,7 @@ class CounterVH private constructor() : GenericAdapter.BindingInterface<Counter>
             return this
         }
 
-        fun setOnLongClickEventListener(onLongClickAction: (Counter) -> Boolean): Builder {
+        fun setOnLongClickEventListener(onLongClickAction: ((Counter) -> Boolean) ): Builder {
             this.counterVH.onLongClickEventListener = onLongClickAction
 
             return this
