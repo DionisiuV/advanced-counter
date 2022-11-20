@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.viewModel.HomeFragmentViewModel
+import kotlinx.android.synthetic.main.counter_item.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -18,6 +20,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        counterRv.layoutManager = GridLayoutManager(activity, 2)
         observeData()
     }
 
@@ -25,25 +29,52 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.incrementCounter(item.position)
     }
 
-    private fun goToFragmentDetails(item: Counter) {
+    private fun goToFragmentDetails(item: Counter): Boolean {
         //navigate to fragment details with item info
-        Log.d("DEBUG_TAG", "navigate to fragment details with item info: ${item}")
+        Log.d("DEBUG_TAG", "navigate to fragment details with item info: $item")
+
+        return true
     }
 
     private fun observeData() {
+
+
         viewModel.getCounters().observe(viewLifecycleOwner) { counters ->
-            counterRv.adapter = getAdapter(counters)
-            counterRv.adapter?.notifyItemRangeInserted(0, counters.size - 1)
+
+            if(counterRv.adapter == null) {
+
+                //init adapter
+                Log.d("DEBUG_TAG", "counterRv Adapter not set, setting rn")
+                counterRv.adapter = getAdapter(counters)
+
+            } else {
+
+                //notify adapter about changes
+                counterRv.adapter?.notifyDataSetChanged()
+            }
+
         }
+
+
     }
 
-    private fun getAdapter(counters:MutableList<Counter>):GeneralAdapter<Counter>{
-        val vh = CounterAdapterVH()
-        vh.setClickListener("onClick", ::incrementCounter)
-        vh.setClickListener("onLongClick", ::goToFragmentDetails)
-        return GeneralAdapter<Counter>().also {
-            it.setData(ArrayList(counters.toList()))
-            it.setViewHolder(vh)
-        }
+
+    private fun getAdapter(counters: MutableList<Counter>) : GenericAdapter<Counter> {
+
+        return GenericAdapter.Builder<Counter>()
+            .setData(counters)
+            .setLayoutResId(R.layout.counter_item)
+            .setViewHolder(getViewHolder())
+            .build()
+    }
+
+
+
+    private fun getViewHolder(): CounterVH {
+
+        return CounterVH.Builder()
+            .setOnClickEventListener(::incrementCounter)
+            .setOnLongClickEventListener(::goToFragmentDetails)
+            .build()
     }
 }

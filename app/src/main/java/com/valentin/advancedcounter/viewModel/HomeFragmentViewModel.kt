@@ -30,6 +30,13 @@ class HomeFragmentViewModel : ViewModel() {
     }
 
     private fun getInitialList(): ArrayList<Counter> {
-        return arrayListOf(Counter(0), Counter(0))
+        return arrayListOf(
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+        )
     }
 }
