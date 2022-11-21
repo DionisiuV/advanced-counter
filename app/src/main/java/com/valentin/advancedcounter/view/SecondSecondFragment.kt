@@ -26,7 +26,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second){
     private fun observeData() {
 
 
-        viewModel.getCounters().observe(viewLifecycleOwner) { counters ->
+        viewModel.getCounters(requireContext()).observe(viewLifecycleOwner) { counters ->
 
             if(counterRvLinear.adapter == null) {
 

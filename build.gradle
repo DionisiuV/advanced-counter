@@ -4,6 +4,7 @@ buildscript {
     ext {
         fragment_version = '1.5.4'
         nav_version = '2.5.3'
+        koin_version= '3.2.2'
     }
 
     dependencies {

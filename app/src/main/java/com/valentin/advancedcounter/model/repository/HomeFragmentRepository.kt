@@ -1,13 +1,13 @@
 package com.valentin.advancedcounter.model.repository
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.valentin.advancedcounter.model.data.Counter
 
-class HomeFragmentRepository {
+interface HomeFragmentRepository {
 
-    fun getCounters() : MutableLiveData<MutableList<Counter>> {
-        val data =  MutableLiveData<MutableList<Counter>>()
+    fun initCounters(context: Context) : MutableList<Counter>
+    fun addDataToSharedPref(data: MutableList<Counter>, context: Context)
+    fun fetchDataFromSharedPref(context: Context) : MutableList<Counter>?
 
-        return data
-    }
 }

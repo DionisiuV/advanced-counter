@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+
     private val viewModel by viewModels<HomeFragmentViewModel>()
 
 
@@ -31,17 +32,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.incrementCounter(item.position)
     }
 
-    private fun goToFragmentDetails(item: Counter): Boolean {
-        //navigate to fragment details with item info
-        Log.d("DEBUG_TAG", "navigate to fragment details with item info: $item")
-
-        return true
-    }
 
     private fun observeData() {
 
-
-        viewModel.getCounters().observe(viewLifecycleOwner) { counters ->
+        viewModel.getCounters(requireContext()).observe(viewLifecycleOwner) { counters ->
 
             if(counterRv.adapter == null) {
 
@@ -52,7 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             } else {
 
                 //notify adapter about changes
-                counterRv.adapter?.notifyDataSetChanged()
+                counterRv.adapter?.notifyItemRangeChanged(0, counters.size)
             }
 
         }
@@ -80,6 +74,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             .build()
     }
 
+
     private fun navigateToSecondFirstFragment(item: Counter) : Boolean {
         Log.d("DEBUG_TAG", "Going to second first fragment")
 
@@ -91,7 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //        val navArgument1= NavArgument.Builder().setDefaultValue("1").build()
 //        view?.findNavController()?.graph?.addArgument("key_1", navArgument1)
 
-
+        //pass bundle
         view?.findNavController()?.navigate(R.id.secondFirstFragment, bundle)
 
         return true
