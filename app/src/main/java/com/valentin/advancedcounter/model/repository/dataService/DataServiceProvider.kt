@@ -10,28 +10,28 @@ class DataServiceProvider : DataService {
 
 
     override fun getCounters(): MutableLiveData<MutableList<Counter>> {
-        if (providedCounters.value == null) {
-            providedCounters.value = mutableListOf(
-                Counter(),
-                Counter(),
-                Counter(),
-                Counter(),
-                Counter(),
-                Counter(),
-            )
-        }//why do you need {} here? {} means turning code into a method
+        if (isProvidedCountersListEmpty())
+            saveCountersAndPostValue(getProviderCountersListHardcodedValue())
 
         return providedCounters
     }
 
-//    private fun isProvidedCountersListEmpty():Boolean
-//
-//    private fun getProviderCountersListHardcodedValue():MutableList<Counter>
+    private fun isProvidedCountersListEmpty(): Boolean {
+        return providedCounters.value == null
+    }
 
+    private fun getProviderCountersListHardcodedValue(): MutableList<Counter> {
+        return mutableListOf(
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+        )
+    }
 
     override fun saveCountersAndPostValue(data: MutableList<Counter>) {
         providedCounters.postValue(data)
     }
-
-
 }

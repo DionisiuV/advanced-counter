@@ -9,12 +9,10 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin {
-            modules(listOf(repositoryModule, viewModelModule ))
-        }
+        initKoinDI()
     }
 
-    private fun initKoinDI() {
+    private fun  initKoinDI() {
         startKoin {
             modules(listOf(repositoryModule, viewModelModule ))
         }

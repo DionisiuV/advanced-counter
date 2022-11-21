@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.valentin.advancedcounter.view.HomeFragment"
+        android:name="com.valentin.advancedcounter.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 
@@ -19,19 +19,19 @@
 
     <fragment
         android:id="@+id/secondFirstFragment"
-        android:name="com.valentin.advancedcounter.view.SecondFirstFragment"
+        android:name="com.valentin.advancedcounter.view.secondFirst.SecondFirstFragment"
         android:label="fragment_second_first"
         tools:layout="@layout/fragment_second_first" />
 
     <fragment
         android:id="@+id/secondSecondFragment"
-        android:name="com.valentin.advancedcounter.view.SecondSecondFragment"
+        android:name="com.valentin.advancedcounter.view.secondSecond.SecondSecondFragment"
         android:label="fragment_second_second"
         tools:layout="@layout/fragment_second_second" />
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.valentin.advancedcounter.view.DetailsFragment"
+        android:name="com.valentin.advancedcounter.view.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 

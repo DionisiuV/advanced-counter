@@ -1,4 +1,4 @@
-package com.valentin.advancedcounter.view
+package com.valentin.advancedcounter.view.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,10 +13,10 @@ class SplashScreenActivity : AppCompatActivity(R.layout.activity_splash_screen) 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        delayBeforeRedirect()
+        countDownBeforeRedirect()
     }
 
-    private fun delayBeforeRedirect() {
+    private fun countDownBeforeRedirect() {
         object : CountDownTimer(2000, 1000) {
             override fun onTick(p0: Long) {
                 setSecondsToTv((p0 / 1000).toInt())
