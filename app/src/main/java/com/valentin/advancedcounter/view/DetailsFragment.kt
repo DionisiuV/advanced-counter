@@ -16,7 +16,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("DEBUG_TAG", arguments?.getString("clicks_count").toString())
-
+//oops!!
         clicksCounterEt.text = arguments?.getString("clicks_count").toString()
     }
 

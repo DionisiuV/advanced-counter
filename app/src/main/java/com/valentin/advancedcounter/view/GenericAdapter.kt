@@ -13,7 +13,7 @@ class GenericAdapter<T> private constructor(): RecyclerView.Adapter<GenericViewH
 
     set(value) {
         field = value
-        notifyDataSetChanged()
+        notifyDataSetChanged()//check out this warning
     }
 
     private lateinit var bindingInterface: BindingInterface<T>
@@ -64,7 +64,7 @@ class GenericAdapter<T> private constructor(): RecyclerView.Adapter<GenericViewH
     }
 
 
-
+//new file
     class GenericViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun <T> bind(item: T, bindingInterface: BindingInterface<T>, position: Int) {
@@ -95,7 +95,7 @@ class GenericAdapter<T> private constructor(): RecyclerView.Adapter<GenericViewH
         return dataSet.size
     }
 
-
+//new file - add to appropriate package
     interface BindingInterface<T> {
 
         fun bindData(item: T, view: View, position: Int)

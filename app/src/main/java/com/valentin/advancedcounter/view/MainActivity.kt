@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomMenu : BottomNavigationView
+    private lateinit var bottomMenu : BottomNavigationView// do you need this?
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,16 +41,16 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setBottomMenu() {
-        bottomMenu = bottomNavigationView as BottomNavigationView
+//        bottomMenu = bottomNavigationView as BottomNavigationView
 
-        bottomMenu.setOnItemSelectedListener {
+        bottomNavigationView.setOnItemSelectedListener {// this should be returned by a method
             when(it.itemId) {
-                R.id.home -> {
+                R.id.home -> {// when this then method call
                     Log.d("DEBUG_TAG", "navigate to home tab")
                     navigateTo(R.id.homeFragment)
-                    true
+                    true//this getsoutside of when scope
                 }
-                R.id.home2 -> {
+                R.id.home2 -> { // when this then method call
                     Log.d("DEBUG_TAG", "navigate to home2 tab")
                     navigateTo(R.id.secondFirstFragment)
                     true
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //THIS SHOULD BE A SERVICE
     private fun navigateTo(resId: Int) {
         navHostFragment.findNavController().navigate(resId)
     }

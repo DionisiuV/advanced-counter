@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_second_first.*
 
 class SecondFirstFragment : Fragment(R.layout.fragment_second_first) {
 
+    //where is my viewModel?
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -24,9 +26,9 @@ class SecondFirstFragment : Fragment(R.layout.fragment_second_first) {
     private fun navigateToSecondSecondFragment(view: View) {
 
         Log.d("DEBUG_TAG", "Going to second second fragment")
+//to much white noise
 
-
-
+//navService function to be called from VM
         view.findNavController().navigate(R.id.secondSecondFragment)
 
     }

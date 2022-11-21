@@ -7,7 +7,6 @@ import kotlinx.android.synthetic.main.counter_item.view.*
 
 class CounterVH private constructor() : GenericAdapter.BindingInterface<Counter> {
 
-
     private var onClickEventListener: ((Counter) -> Unit) = { _ -> }
     private var onLongClickEventListener: ((Counter) -> Boolean) = { false }
 
