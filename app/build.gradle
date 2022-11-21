@@ -4,18 +4,15 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
-//todo :
-// 1. rearrange files into packages
-
 
 android {
     namespace 'com.valentin.advancedcounter'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.valentin.advancedcounter"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -42,8 +39,8 @@ android {
 
 dependencies {
 
-
-    implementation 'androidx.core:core-ktx:1.7.0'
+    //Default
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -51,19 +48,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.21" // wazzap??
-
-
-    // Fragment - do you need this import?
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
-
     // Navigation dependencies
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"//- do you need this import?
 
     //koin
     implementation "io.insert-koin:koin-android:$koin_version"
 
-    //Gson
-    implementation 'com.google.code.gson:gson:2.8.5'
 }

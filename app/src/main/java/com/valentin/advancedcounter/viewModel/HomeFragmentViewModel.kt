@@ -3,7 +3,7 @@ package com.valentin.advancedcounter.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.valentin.advancedcounter.model.data.Counter
-import com.valentin.advancedcounter.model.repository.DataService
+import com.valentin.advancedcounter.model.repository.dataService.DataService
 
 class HomeFragmentViewModel(
     private val dataService: DataService

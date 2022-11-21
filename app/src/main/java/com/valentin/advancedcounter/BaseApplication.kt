@@ -8,8 +8,15 @@ import org.koin.core.context.startKoin
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin {//oops
-            modules(listOf(repositoryModule, viewModelModule))
+
+        startKoin {
+            modules(listOf(repositoryModule, viewModelModule ))
+        }
+    }
+
+    private fun initKoinDI() {
+        startKoin {
+            modules(listOf(repositoryModule, viewModelModule ))
         }
     }
 }

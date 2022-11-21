@@ -1,18 +1,20 @@
 package com.valentin.advancedcounter.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.widget.Toolbar
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.valentin.advancedcounter.R
+import com.valentin.advancedcounter.model.repository.navService.NavServiceProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.java.KoinJavaComponent.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomMenu : BottomNavigationView// do you need this?
+    private val navService: NavServiceProvider by inject(NavServiceProvider::class.java)
+//    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,51 +22,47 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setNavGraph()
+//        getNavController()
         setBottomMenu()
     }
 
 
     private fun setNavGraph() {
-
-        //init nav host
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-
-        //configure nav graph
-        val navController = navHostFragment.navController
-        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
-        //setting start destination
-        navGraph.setStartDestination(R.id.homeFragment)
-
-        //set nav graph
-        navController.graph = navGraph
+        navService.setNavMainActivityNavGraph(this)
     }
 
-
     private fun setBottomMenu() {
-//        bottomMenu = bottomNavigationView as BottomNavigationView
-
-        bottomNavigationView.setOnItemSelectedListener {// this should be returned by a method
-            when(it.itemId) {
-                R.id.home -> {// when this then method call
-                    Log.d("DEBUG_TAG", "navigate to home tab")
-                    navigateTo(R.id.homeFragment)
-                    true//this getsoutside of when scope
-                }
-                R.id.home2 -> { // when this then method call
-                    Log.d("DEBUG_TAG", "navigate to home2 tab")
-                    navigateTo(R.id.secondFirstFragment)
-                    true
-                }
-                else -> throw Exception("no")
-            }
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            setNavRoutes(menuItem)
+            true
         }
     }
 
-    //THIS SHOULD BE A SERVICE
-    private fun navigateTo(resId: Int) {
-        navHostFragment.findNavController().navigate(resId)
+    //this dont work for some reason ???
+//    private fun getNavController() {
+//        navController = navService.getNavControllerByActivity(this)
+//    }
+
+    private fun setNavRoutes(menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.home -> navigateToHomeFragment()
+            R.id.home2 -> navigateToSecondFirstFragment()
+            else -> throw Exception("no")
+        }
     }
 
+    private fun navigateToHomeFragment() {
+        Log.d("DEBUG_TAG", "navigate to home fragment")
+        navigateTo(R.id.homeFragment)
+    }
 
+    private fun navigateToSecondFirstFragment() {
+        Log.d("DEBUG_TAG", "navigate to secondFirstFragment")
+        navigateTo(R.id.secondFirstFragment)
+    }
+
+    private fun navigateTo(resId: Int) {
+        navService.getNavControllerByActivity(this).navigate(resId)
+    }
 
 }
