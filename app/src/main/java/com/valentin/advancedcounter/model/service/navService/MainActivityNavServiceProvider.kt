@@ -1,4 +1,4 @@
-package com.valentin.advancedcounter.model.repository.navService
+package com.valentin.advancedcounter.model.service.navService
 
 
 import androidx.navigation.NavController
@@ -32,8 +32,8 @@ class MainActivityNavServiceProvider : MainActivityNavService {
     }
 
     private fun initNavService(activity: MainActivity) {
-        val navController = getNavController()
         this.activity = activity
+        val navController = getNavController()
 
         navController.graph = navController.navInflater.inflate(getNavGraph())
     }

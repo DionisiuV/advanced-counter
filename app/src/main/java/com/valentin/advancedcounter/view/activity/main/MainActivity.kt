@@ -1,7 +1,9 @@
 package com.valentin.advancedcounter.view.activity.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.valentin.advancedcounter.R
 import kotlinx.android.synthetic.main.activity_main.*

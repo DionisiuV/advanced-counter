@@ -1,4 +1,4 @@
-package com.valentin.advancedcounter.model.repository.dataService
+package com.valentin.advancedcounter.model.service.dataService
 
 import androidx.lifecycle.MutableLiveData
 import com.valentin.advancedcounter.model.data.Counter

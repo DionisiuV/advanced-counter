@@ -1,9 +1,9 @@
 package com.valentin.advancedcounter.koinDI
 
-import com.valentin.advancedcounter.model.repository.dataService.DataService
-import com.valentin.advancedcounter.model.repository.dataService.DataServiceProvider
-import com.valentin.advancedcounter.model.repository.navService.MainActivityNavService
-import com.valentin.advancedcounter.model.repository.navService.MainActivityNavServiceProvider
+import com.valentin.advancedcounter.model.service.dataService.DataService
+import com.valentin.advancedcounter.model.service.dataService.DataServiceProvider
+import com.valentin.advancedcounter.model.service.navService.MainActivityNavService
+import com.valentin.advancedcounter.model.service.navService.MainActivityNavServiceProvider
 import com.valentin.advancedcounter.view.activity.main.MainActivityViewModel
 import com.valentin.advancedcounter.view.details.DetailsFragmentViewModel
 import com.valentin.advancedcounter.view.home.HomeFragmentViewModel

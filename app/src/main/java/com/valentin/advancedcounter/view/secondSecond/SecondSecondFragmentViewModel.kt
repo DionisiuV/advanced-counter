@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
-import com.valentin.advancedcounter.model.repository.dataService.DataService
-import com.valentin.advancedcounter.model.repository.navService.MainActivityNavService
+import com.valentin.advancedcounter.model.service.dataService.DataService
+import com.valentin.advancedcounter.model.service.navService.MainActivityNavService
 
 class SecondSecondFragmentViewModel(
     private val dataService: DataService,

@@ -1,4 +1,4 @@
-package com.valentin.advancedcounter.model.repository.navService
+package com.valentin.advancedcounter.model.service.navService
 
 import com.valentin.advancedcounter.view.activity.main.MainActivity
 

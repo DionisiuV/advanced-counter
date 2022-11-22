@@ -3,7 +3,7 @@ package com.valentin.advancedcounter.view.activity.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.valentin.advancedcounter.R
-import com.valentin.advancedcounter.model.repository.navService.MainActivityNavService
+import com.valentin.advancedcounter.model.service.navService.MainActivityNavService
 
 class MainActivityViewModel(
     private val navService: MainActivityNavService
