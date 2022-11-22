@@ -23,7 +23,7 @@ class SecondFirstFragment : Fragment(R.layout.fragment_second_first) {
     }
 
     private fun navigateToSecondSecondFragment() {
-        viewModel.navigateToSecondSecondFragment(requireActivity())
+        viewModel.navigateToSecondSecondFragment(requireActivity())//do not pass context/view as param into ViewModel
     }
 
     private fun setNavigateButton() {

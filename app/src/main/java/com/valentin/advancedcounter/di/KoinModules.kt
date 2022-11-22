@@ -8,6 +8,8 @@ import com.valentin.advancedcounter.view.home.HomeFragmentViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+//rename the 'di' package
+
 val repositoryModule = module {
 
     single<DataService> { DataServiceProvider() }

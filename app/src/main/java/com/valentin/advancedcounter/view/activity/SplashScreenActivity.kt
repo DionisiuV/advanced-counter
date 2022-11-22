@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity(R.layout.activity_splash_screen) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,6 +19,7 @@ class SplashScreenActivity : AppCompatActivity(R.layout.activity_splash_screen) 
 
     private fun countDownBeforeRedirect() {
         object : CountDownTimer(2000, 1000) {
+
             override fun onTick(p0: Long) {
                 setSecondsToTv((p0 / 1000).toInt())
             }

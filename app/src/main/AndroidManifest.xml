@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- check warnings here -->
+    <!-- do you need meta-data? - where was this code copied from? -->
+    <!-- why do you need 'tools:targetApi="31" ' ?? -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

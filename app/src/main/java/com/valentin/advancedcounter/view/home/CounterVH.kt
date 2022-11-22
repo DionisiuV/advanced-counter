@@ -50,12 +50,12 @@ class CounterVH private constructor() : BindingInterface<Counter> {
     }
 
     override fun bindData(item: Counter, view: View, position: Int) {
-        view.clicksAmountTv.text = item.numberOfClicks.toString()
+        view.clicksAmountTv.text = item.numberOfClicks.toString()//oops!!
         item.position = position
         setClickEvents(item, view)
     }
 
     override fun getLayoutResId(): Int {
-        return this.layoutResourceId
+        return this.layoutResourceId // you don't need 'layoutResourceId' global param; you don't need setter for it; you can override this method dirrectly to 'return R.layout.whatever_layout'
     }
 }

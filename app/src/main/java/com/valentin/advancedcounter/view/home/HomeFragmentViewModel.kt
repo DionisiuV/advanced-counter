@@ -31,26 +31,26 @@ class HomeFragmentViewModel(
         navService.setNavMainActivityNavGraph(activity)
     }
 
-    private fun navigateTo(resId: Int, activity: Activity) {
+    private fun navigateTo(resId: Int, activity: Activity) {//do not pass context/view as param into ViewModel
         navService.getNavControllerByActivity(activity).navigate(resId)
     }
 
-    fun navigateToHomeFragment(activity: Activity) {
+    fun navigateToHomeFragment(activity: Activity) {//do not pass context/view as param into ViewModel
         Log.d("DEBUG_TAG", "navigate to home fragment")
         navigateTo(R.id.homeFragment, activity)
     }
 
-    fun navigateToSecondFirstFragment(activity: Activity) {
+    fun navigateToSecondFirstFragment(activity: Activity) {//do not pass context/view as param into ViewModel
         Log.d("DEBUG_TAG", "navigate to secondFirstFragment")
         navigateTo(R.id.secondFirstFragment, activity)
     }
 
-    fun navigateToSecondSecondFragment(activity: Activity) {
+    fun navigateToSecondSecondFragment(activity: Activity) {//do not pass context/view as param into ViewModel
         Log.d("DEBUG_TAG", "navigate to secondSecondFragment")
         navigateTo(R.id.secondSecondFragment, activity)
     }
 
-    fun navigateToDetailsFragment(activity: Activity) {
+    fun navigateToDetailsFragment(activity: Activity) {//do not pass context/view as param into ViewModel
         Log.d("DEBUG_TAG", "navigate to detailsFragment")
         navigateTo(R.id.detailsFragment, activity)
     }

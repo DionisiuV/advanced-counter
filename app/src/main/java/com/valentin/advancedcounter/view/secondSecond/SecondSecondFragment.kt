@@ -76,6 +76,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
 
     private fun navigateToDetailsFragment(item: Counter): Boolean {
         //set info to shared pref
+//        what shared prefs?
         val sharedPref = activity?.getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
         val sharedPrefEdit = sharedPref?.edit()
         sharedPrefEdit?.putString("clicks_amount", item.numberOfClicks.toString())?.apply()

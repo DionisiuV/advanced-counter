@@ -12,16 +12,16 @@ class NavServiceProvider : NavService {
 
     override fun setNavMainActivityNavGraph(activity: MainActivity) {
 
-        //init nav host
+        //init nav host              // irrelevant comment
         val navHostFragment = activity.supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
 
-        //configure nav graph
+        //configure nav graph       // irrelevant comment
         val navController = navHostFragment.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
         //setting start destination
         navGraph.setStartDestination(R.id.homeFragment)
 
-        //set nav graph
+        //set nav graph             // irrelevant comment
         navController.graph = navGraph
     }
 

@@ -3,9 +3,10 @@ package com.valentin.advancedcounter.view.secondSecond
 import android.view.View
 import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.view.adapter.BindingInterface
-import com.valentin.advancedcounter.view.home.CounterVH
 import kotlinx.android.synthetic.main.counter_item.view.*
 
+//what does this mean - VHL? does this class have cancer?
+//how does this class differ from Counter VH?
 class CounterVHL private constructor() : BindingInterface<Counter> {
 
     private var onClickEventListener: ((Counter) -> Unit) = { _ -> }
@@ -13,34 +14,34 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
     private var layoutResourceId: Int = 0
 
 
-    class Builder {
-        private val counterVHL = CounterVHL()
+    class Builder {//move this either top or bottom of the file - recommend bottom
+        private val counterVH = CounterVHL()
 
         fun setOnClickEventListener(clickAction: (Counter) -> Unit): Builder {
-            this.counterVHL.onClickEventListener = clickAction
+            this.counterVH.onClickEventListener = clickAction
 
             return this
         }
 
         fun setOnLongClickEventListener(onLongClickAction: ((Counter) -> Boolean)): Builder {
-            this.counterVHL.onLongClickEventListener = onLongClickAction
+            this.counterVH.onLongClickEventListener = onLongClickAction
 
             return this
         }
 
         fun setLayoutResId(layoutResId: Int): Builder {
-            counterVHL.setLayoutResId(layoutResId)
+            counterVH.setLayoutResId(layoutResId)
 
             return this
         }
 
         fun build(): CounterVHL {
-            return counterVHL
+            return counterVH
         }
     }
 
     override fun bindData(item: Counter, view: View, position: Int) {
-        view.clicksAmountTv.text = item.numberOfClicks.toString()
+        view.clicksAmountTv.text = item.numberOfClicks.toString()//oops!!
         item.position = position
 
         setClickEvents(item, view)
@@ -56,7 +57,8 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
     }
 
     private fun setLayoutResId(layoutResId: Int) {
-        this.layoutResourceId = layoutResId
+        this.layoutResourceId = layoutResId// you don't need 'layoutResourceId' global param; you don't need setter for it; you can override this method dirrectly to 'return R.layout.whatever_layout'
+
     }
 
 

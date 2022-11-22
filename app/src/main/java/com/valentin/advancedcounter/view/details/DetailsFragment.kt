@@ -18,6 +18,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     }
 
     //when user leaving the fragment clear shared pref
+    //what shared prefs? - you don't need them
     override fun onPause() {
         super.onPause()
 

@@ -9,7 +9,7 @@ import com.valentin.advancedcounter.view.adapter.GenericAdapter.*
 class GenericAdapter<T> private constructor(): RecyclerView.Adapter<GenericViewHolder>() {
 
     private var dataSet: List<T> = listOf()
-    set(value) {
+    set(value) {//create separate setter method to clean class variables area
         field = value
         notifyItemRangeInserted(0, dataSet.size)//check out this warning
     }
@@ -25,7 +25,7 @@ class GenericAdapter<T> private constructor(): RecyclerView.Adapter<GenericViewH
         this.bindingInterface = bindingInterface
     }
 
-
+    //reposition this class either top or bottom of the file -> i recommend bottom
     class Builder<T> {
 
         private val genericAdapter = GenericAdapter<T>()
