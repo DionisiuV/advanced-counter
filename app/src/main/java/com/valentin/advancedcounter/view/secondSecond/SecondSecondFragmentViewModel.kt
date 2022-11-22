@@ -1,4 +1,4 @@
-package com.valentin.advancedcounter.view.home
+package com.valentin.advancedcounter.view.secondSecond
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.model.repository.dataService.DataService
 import com.valentin.advancedcounter.model.repository.navService.MainActivityNavService
 
-class HomeFragmentViewModel(
+class SecondSecondFragmentViewModel(
     private val dataService: DataService,
     private val navService: MainActivityNavService,
 ) : ViewModel() {
@@ -22,6 +22,6 @@ class HomeFragmentViewModel(
 
     fun saveSelectedItemAndNavigateToDetailsFragment(selectedItem: Counter) {
         dataService.saveCounterToBeDisplayed(selectedItem)
-        navService.navigateTo(R.id.detailsFragment)
+        navService.navigateTo(R.id.action_second_second_to_details)
     }
 }

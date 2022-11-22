@@ -5,7 +5,14 @@ import com.valentin.advancedcounter.model.data.Counter
 
 interface DataService {
 
-    fun getCounters() : MutableLiveData<MutableList<Counter>>
+    fun getCounters(): MutableLiveData<MutableList<Counter>>
 
-    fun saveCountersAndPostValue(data: MutableList<Counter>)
+    fun incrementNumberOfClicksForCounterAtPositionAndPostValue(position: Int)
+
+    fun saveCounterToBeDisplayed(counter: Counter)
+
+    fun getCounterToBeDisplayed(): Counter
+
+    fun clearCounterToBeDisplayed()
+
 }

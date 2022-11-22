@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class GenericAdapter<T> private constructor() : RecyclerView.Adapter<GenericAdapterViewHolder>() {
+class GenericAdapter<T> private constructor() : RecyclerView.Adapter<GenericViewHolder>() {
 
     private var dataSet: List<T> = listOf()
     private lateinit var bindingInterface: GenericAdapterBindingInterface<T>
@@ -14,14 +14,14 @@ class GenericAdapter<T> private constructor() : RecyclerView.Adapter<GenericAdap
         this.bindingInterface = bindingInterface
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericAdapterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(bindingInterface.getLayoutResId(), parent, false)
 
-        return GenericAdapterViewHolder(itemView)
+        return GenericViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: GenericAdapterViewHolder, position: Int) {
-        holder.bindViewHolderToAdapter(dataSet[position], bindingInterface, position)
+    override fun onBindViewHolder(holder: GenericViewHolder, position: Int) {
+        holder.bindDataToViewHolder(dataSet[position], bindingInterface, position)
     }
 
     override fun getItemCount(): Int {

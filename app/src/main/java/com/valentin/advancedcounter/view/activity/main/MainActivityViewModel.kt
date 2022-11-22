@@ -3,26 +3,27 @@ package com.valentin.advancedcounter.view.activity.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.valentin.advancedcounter.R
-import com.valentin.advancedcounter.model.repository.navService.NavService
+import com.valentin.advancedcounter.model.repository.navService.MainActivityNavService
 
 class MainActivityViewModel(
-    private val navService: NavService
+    private val navService: MainActivityNavService
 ) : ViewModel() {
-    fun setNavGraph(mainActivity: MainActivity) {
-        navService.setNavMainActivityNavGraph(mainActivity)
+
+    fun initNavigationForMainActivity(mainActivity: MainActivity) {
+        navService.doNavigationServiceSetup(mainActivity)
     }
 
-    fun navigateToHomeFragment(mainActivity: MainActivity) {
-        Log.d("DEBUG_TAG", "navigate to home fragment")
-        navigateTo(R.id.homeFragment, mainActivity)
+    fun navigateToHomeFragment() {
+        Log.d("DEBUG_TAG", "navigate to HomeFragment")
+        navigateTo(R.id.homeFragment)
     }
 
-    fun navigateToSecondFirstFragment(mainActivity: MainActivity) {
-        Log.d("DEBUG_TAG", "navigate to secondFirstFragment")
-        navigateTo(R.id.secondFirstFragment, mainActivity)
+    fun navigateToSecondFirstFragment() {
+        Log.d("DEBUG_TAG", "navigate to SecondFirstFragment")
+        navigateTo(R.id.secondFirstFragment)
     }
 
-    private fun navigateTo(resId: Int, mainActivity: MainActivity) {
-        navService.getNavControllerByActivity(mainActivity).navigate(resId)
+    private fun navigateTo(resId: Int) {
+        navService.navigateTo(resId)
     }
 }

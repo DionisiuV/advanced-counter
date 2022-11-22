@@ -7,5 +7,6 @@ import android.view.View
 interface GenericAdapterBindingInterface<T> {
 
     fun bindDataToView(item: T, view: View, position: Int)
+
     fun getLayoutResId(): Int
 }

@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SecondFirstFragment : Fragment(R.layout.fragment_second_first) {
 
-    private val viewModel : HomeFragmentViewModel by viewModel()
+    private val viewModel : SecondFragmentViewModel by viewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class SecondFirstFragment : Fragment(R.layout.fragment_second_first) {
     }
 
     private fun navigateToSecondSecondFragment() {
-        viewModel.navigateToSecondSecondFragment(requireActivity())
+        viewModel.navigateToSecondSecondFragment()
     }
 
     private fun setNavigateButton() {

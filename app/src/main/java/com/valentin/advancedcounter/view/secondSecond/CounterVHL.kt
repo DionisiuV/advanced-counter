@@ -31,11 +31,8 @@ class CounterVHL private constructor() : GenericAdapterBindingInterface<Counter>
         itemView.setOnLongClickListener { onLongClickEventListener(item) }
     }
 
-    //maybe use another approach to handle events for this VH
-    // event pattern? -> https://medium.com/tech-takeaways/how-to-implement-the-event-bus-pattern-with-kotlin-sharedflow-in-your-android-app-768529828607
     class Builder {
         private val counterVHL = CounterVHL()
-
 
         fun setOnClickEventListener(clickAction: (Counter) -> Unit): Builder {
             this.counterVHL.onClickEventListener = clickAction

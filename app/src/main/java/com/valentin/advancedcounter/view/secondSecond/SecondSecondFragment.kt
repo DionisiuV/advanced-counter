@@ -1,21 +1,18 @@
 package com.valentin.advancedcounter.view.secondSecond
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.view.genericAdapter.GenericAdapter
-import com.valentin.advancedcounter.view.home.HomeFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_second_second.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
 
-    private val viewModel: HomeFragmentViewModel by viewModel()
+    private val viewModel: SecondSecondFragmentViewModel by viewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,10 +22,10 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
     }
 
     private fun observeData() {
-        viewModel.getCounters().observe(viewLifecycleOwner) { provideAdapterWithData(it) }
+        viewModel.getCounters().observe(viewLifecycleOwner) { updateRecyclerViewWithLatestChanges(it) }
     }
 
-    private fun provideAdapterWithData(counters: MutableList<Counter>) {
+    private fun updateRecyclerViewWithLatestChanges(counters: MutableList<Counter>) {
         if (isAdapterNotAttached())
             initAdapter(counters)
         else
@@ -36,15 +33,11 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
     }
 
     private fun initAdapter(counters: MutableList<Counter>) {
-        Log.d("DEBUG_TAG", "counterRv Adapter not set, setting rn")
-
         counterRvLinear.layoutManager = LinearLayoutManager(activity)
         counterRvLinear.adapter = getAdapter(counters)
     }
 
     private fun notifyAdapterAboutChanges(counters: MutableList<Counter>) {
-        Log.d("DEBUG_TAG", "notify adapter about changes")
-
         counterRvLinear.adapter?.notifyItemRangeChanged(0, counters.size)
     }
 
@@ -53,7 +46,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
     }
 
     private fun incrementCounter(item: Counter) {
-        viewModel.incrementCounter(item.position)
+        viewModel.incrementCounterAndNotify(item.position)
     }
 
     private fun getAdapter(counters: MutableList<Counter>): GenericAdapter<Counter> {
@@ -71,15 +64,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
     }
 
     private fun navigateToDetailsFragment(item: Counter): Boolean {
-        //what shared prefs? -> used to save clicks amount so i can display in fragment display
-        saveToSharedPref(item)
-        viewModel.navigateToDetailsFragment(requireActivity())
+        viewModel.saveSelectedItemAndNavigateToDetailsFragment(item)
         return true
-    }
-
-    private fun saveToSharedPref(item: Counter) {
-        val sharedPref = activity?.getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
-        val sharedPrefEdit = sharedPref?.edit()
-        sharedPrefEdit?.putString("clicks_amount", item.numberOfClicks.toString())?.apply()
     }
 }
