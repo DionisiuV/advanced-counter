@@ -1,19 +1,21 @@
 package com.valentin.advancedcounter.view.secondSecond
 
 import android.view.View
+import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
-import com.valentin.advancedcounter.view.adapter.BindingInterface
-import com.valentin.advancedcounter.view.home.CounterVH
+import com.valentin.advancedcounter.view.genericAdapter.GenericAdapterBindingInterface
 import kotlinx.android.synthetic.main.counter_item.view.*
 
-class CounterVHL private constructor() : BindingInterface<Counter> {
+
+//what does this mean - VHL? does this class have cancer? - view holder linear -> just to differentiate them
+//how does this class differ from Counter VH? - made just for practice, no changes/ maybe i will handle click events in the other way
+class CounterVHL private constructor() : GenericAdapterBindingInterface<Counter> {
 
     private var onClickEventListener: ((Counter) -> Unit) = { _ -> }
     private var onLongClickEventListener: ((Counter) -> Boolean) = { false }
-    private var layoutResourceId: Int = 0
 
 
-    override fun bindData(item: Counter, view: View, position: Int) {
+    override fun bindDataToView(item: Counter, view: View, position: Int) {
         view.clicksAmountTv.text = item.numberOfClicks.toString()
         item.position = position
 
@@ -21,7 +23,7 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
     }
 
     override fun getLayoutResId(): Int {
-        return this.layoutResourceId
+        return R.layout.counter_item
     }
 
     private fun setClickEvents(item: Counter, itemView: View) {
@@ -29,13 +31,11 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
         itemView.setOnLongClickListener { onLongClickEventListener(item) }
     }
 
-    private fun setLayoutResId(layoutResId: Int) {
-        this.layoutResourceId = layoutResId
-    }
-
-
+    //maybe use another approach to handle events for this VH
+    // event pattern? -> https://medium.com/tech-takeaways/how-to-implement-the-event-bus-pattern-with-kotlin-sharedflow-in-your-android-app-768529828607
     class Builder {
         private val counterVHL = CounterVHL()
+
 
         fun setOnClickEventListener(clickAction: (Counter) -> Unit): Builder {
             this.counterVHL.onClickEventListener = clickAction
@@ -45,12 +45,6 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
 
         fun setOnLongClickEventListener(onLongClickAction: ((Counter) -> Boolean)): Builder {
             this.counterVHL.onLongClickEventListener = onLongClickAction
-
-            return this
-        }
-
-        fun setLayoutResId(layoutResId: Int): Builder {
-            counterVHL.setLayoutResId(layoutResId)
 
             return this
         }

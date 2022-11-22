@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
-import com.valentin.advancedcounter.view.adapter.GenericAdapter
+import com.valentin.advancedcounter.view.genericAdapter.GenericAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,17 +21,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        getClicksAmountFromSharedPref()  //what shared prefs? - you don't need them ??
+//        getClicksAmountFromSharedPref()  //what shared prefs? - you don't need them -> testing purpose
     }
 
     private fun observeData() {
-        viewModel.getCounters().observe(viewLifecycleOwner) { counters -> //this should be a new method - oops
+        viewModel.getCounters().observe(viewLifecycleOwner) { provideAdapterWithData(it) }
+    }
 
-            if (isAdapterNotAttached())
-                initAdapter(counters)
-            else
-                notifyAdapterAboutChanges(counters)
-        }
+    private fun provideAdapterWithData(counters: MutableList<Counter>) {
+        if (isAdapterNotAttached())
+            initAdapter(counters)
+        else
+            notifyAdapterAboutChanges(counters)
     }
 
     private fun initAdapter(counters: MutableList<Counter>) {
@@ -63,20 +64,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun getViewHolder(): CounterVH {
         return CounterVH.Builder()
             .setOnClickEventListener(::incrementCounter)
-            .setOnLongClickEventListener(::navigateToSecondFirstFragment)
-            .setLayoutResId(R.layout.counter_item)
+            .setOnLongClickEventListener(::navigateToDetailsFragment)
             .build()
     }
 
-    private fun navigateToSecondFirstFragment(item: Counter): Boolean { //unused parameter - either remove bcs it's not needed or fix issue ??
-        viewModel.navigateToSecondFirstFragment(requireActivity())
-
+    private fun navigateToDetailsFragment(item: Counter): Boolean {
+        //what shared prefs? -> used to save clicks amount so i can display in fragment details
+        saveToSharedPref(item)
+        Log.d("DEBUG_TAG", "navigateToDetailsFragment() clicks amount: ${item.numberOfClicks}")
+        viewModel.navigateToDetailsFragment(requireActivity())
         return true
     }
 
-    private fun getClicksAmountFromSharedPref() {
+    private fun saveToSharedPref(item: Counter) {
         val sharedPref = activity?.getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
-
-        Log.d("DEBUG_TAG", sharedPref?.getString("clicks_amount", (0).toString()).toString())
+        val sharedPrefEdit = sharedPref?.edit()
+        Log.d("DEBUG_TAG", "saveToSharedPref() clicks amount: ${item.numberOfClicks}")
+        sharedPrefEdit?.putString("clicks_amount", item.numberOfClicks.toString())?.apply()
     }
 }

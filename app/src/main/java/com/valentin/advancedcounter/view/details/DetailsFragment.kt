@@ -15,10 +15,11 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         setClicksAmountToTv()
+        Log.d("DEBUG_TAG", "navigateToDetailsFragment() clicks amount: ${getClicksAmountFromSharedPref().toString()}")
     }
 
     //when user leaving the fragment clear shared pref
-    //what shared prefs? - you don't need them ????
+    //what shared prefs? - you don't need them -> used for display clicks amount in fragment details, need to clear after that
     override fun onPause() {
         super.onPause()
 

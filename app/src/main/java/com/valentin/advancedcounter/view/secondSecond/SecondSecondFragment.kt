@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
-import com.valentin.advancedcounter.view.adapter.GenericAdapter
-import com.valentin.advancedcounter.view.home.CounterVH
+import com.valentin.advancedcounter.view.genericAdapter.GenericAdapter
 import com.valentin.advancedcounter.view.home.HomeFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_second_second.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,22 +25,20 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
     }
 
     private fun observeData() {
-        viewModel.getCounters().observe(viewLifecycleOwner) { counters ->
+        viewModel.getCounters().observe(viewLifecycleOwner) { provideAdapterWithData(it) }
+    }
 
-            if (isAdapterNotAttached())
-                initAdapter(counters)
-            else
-                notifyAdapterAboutChanges(counters)
-        }
+    private fun provideAdapterWithData(counters: MutableList<Counter>) {
+        if (isAdapterNotAttached())
+            initAdapter(counters)
+        else
+            notifyAdapterAboutChanges(counters)
     }
 
     private fun initAdapter(counters: MutableList<Counter>) {
         Log.d("DEBUG_TAG", "counterRv Adapter not set, setting rn")
 
-        //setting layout manager for rv
         counterRvLinear.layoutManager = LinearLayoutManager(activity)
-
-        //setting adapter for rv
         counterRvLinear.adapter = getAdapter(counters)
     }
 
@@ -70,19 +67,19 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
         return CounterVHL.Builder()
             .setOnClickEventListener(::incrementCounter)
             .setOnLongClickEventListener(::navigateToDetailsFragment)
-            .setLayoutResId(R.layout.counter_item)
             .build()
     }
 
     private fun navigateToDetailsFragment(item: Counter): Boolean {
-        //set info to shared pref
-        //what shared prefs? - ?????
+        //what shared prefs? -> used to save clicks amount so i can display in fragment display
+        saveToSharedPref(item)
+        viewModel.navigateToDetailsFragment(requireActivity())
+        return true
+    }
+
+    private fun saveToSharedPref(item: Counter) {
         val sharedPref = activity?.getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
         val sharedPrefEdit = sharedPref?.edit()
         sharedPrefEdit?.putString("clicks_amount", item.numberOfClicks.toString())?.apply()
-
-        viewModel.navigateToDetailsFragment(requireActivity())
-
-        return true
     }
 }
