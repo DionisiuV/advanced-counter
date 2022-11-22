@@ -6,22 +6,16 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.valentin.advancedcounter.R
-import com.valentin.advancedcounter.view.activity.MainActivity
+import com.valentin.advancedcounter.view.activity.main.MainActivity
 
-class NavServiceProvider : NavService {
+class NavServiceProvider() : NavService {
 
-    override fun setNavMainActivityNavGraph(activity: MainActivity) {
-
-        //init nav host
-        val navHostFragment = activity.supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-
-        //configure nav graph
+    override fun setNavMainActivityNavGraph(mainActivity: MainActivity) {
+        
+        val navHostFragment = mainActivity.supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
-        //setting start destination
         navGraph.setStartDestination(R.id.homeFragment)
-
-        //set nav graph
         navController.graph = navGraph
     }
 

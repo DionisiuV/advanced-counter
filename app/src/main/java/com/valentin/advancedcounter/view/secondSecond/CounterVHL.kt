@@ -13,6 +13,27 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
     private var layoutResourceId: Int = 0
 
 
+    override fun bindData(item: Counter, view: View, position: Int) {
+        view.clicksAmountTv.text = item.numberOfClicks.toString()
+        item.position = position
+
+        setClickEvents(item, view)
+    }
+
+    override fun getLayoutResId(): Int {
+        return this.layoutResourceId
+    }
+
+    private fun setClickEvents(item: Counter, itemView: View) {
+        itemView.setOnClickListener { onClickEventListener(item) }
+        itemView.setOnLongClickListener { onLongClickEventListener(item) }
+    }
+
+    private fun setLayoutResId(layoutResId: Int) {
+        this.layoutResourceId = layoutResId
+    }
+
+
     class Builder {
         private val counterVHL = CounterVHL()
 
@@ -38,27 +59,4 @@ class CounterVHL private constructor() : BindingInterface<Counter> {
             return counterVHL
         }
     }
-
-    override fun bindData(item: Counter, view: View, position: Int) {
-        view.clicksAmountTv.text = item.numberOfClicks.toString()
-        item.position = position
-
-        setClickEvents(item, view)
-    }
-
-    override fun getLayoutResId(): Int {
-        return this.layoutResourceId
-    }
-
-    private fun setClickEvents(item: Counter, itemView: View) {
-        itemView.setOnClickListener { onClickEventListener(item) }
-        itemView.setOnLongClickListener { onLongClickEventListener(item) }
-    }
-
-    private fun setLayoutResId(layoutResId: Int) {
-        this.layoutResourceId = layoutResId
-    }
-
-
-
 }

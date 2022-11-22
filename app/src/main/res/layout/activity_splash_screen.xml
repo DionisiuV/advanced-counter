@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.activity.SplashScreenActivity"><!--oops-->
+    android:layout_height="match_parent">
 
     <!--what should we do about this hardcoded values?-->
     <TextView

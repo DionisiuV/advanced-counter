@@ -1,4 +1,4 @@
-package com.valentin.advancedcounter.view.activity
+package com.valentin.advancedcounter.view.activity.main
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: HomeFragmentViewModel by viewModel()
+    private val viewModel: MainActivityViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

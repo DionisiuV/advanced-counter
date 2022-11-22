@@ -4,7 +4,6 @@ import android.view.View
 import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.view.adapter.BindingInterface
 import kotlinx.android.synthetic.main.counter_item.view.*
-import kotlin.reflect.KFunction1
 
 
 class CounterVH private constructor() : BindingInterface<Counter> {
@@ -50,12 +49,12 @@ class CounterVH private constructor() : BindingInterface<Counter> {
     }
 
     override fun bindData(item: Counter, view: View, position: Int) {
-        view.clicksAmountTv.text = item.numberOfClicks.toString()
+        view.clicksAmountTv.text = item.numberOfClicks.toString()//oops!!
         item.position = position
         setClickEvents(item, view)
     }
 
     override fun getLayoutResId(): Int {
-        return this.layoutResourceId
+        return this.layoutResourceId // you don't need 'layoutResourceId' global param; you don't need setter for it; you can override this method dirrectly to 'return R.layout.whatever_layout'
     }
 }

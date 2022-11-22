@@ -21,11 +21,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        getClicksAmountFromSharedPref()
+        getClicksAmountFromSharedPref()  //what shared prefs? - you don't need them ??
     }
 
     private fun observeData() {
-        viewModel.getCounters().observe(viewLifecycleOwner) { counters -> //this should be a new method
+        viewModel.getCounters().observe(viewLifecycleOwner) { counters -> //this should be a new method - oops
 
             if (isAdapterNotAttached())
                 initAdapter(counters)
@@ -36,17 +36,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initAdapter(counters: MutableList<Counter>) {
         Log.d("DEBUG_TAG", "counterRv Adapter not set, setting rn")
-
-        //setting layout manager for rv
         counterRv.layoutManager = GridLayoutManager(activity, 2)
-
-        //setting adapter for rv
         counterRv.adapter = getAdapter(counters)
     }
 
     private fun notifyAdapterAboutChanges(counters: MutableList<Counter>) {
         Log.d("DEBUG_TAG", "notify adapter about changes")
-
         counterRv.adapter?.notifyItemRangeChanged(0, counters.size)
     }
 
@@ -60,7 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun getAdapter(counters: MutableList<Counter>): GenericAdapter<Counter> {
         return GenericAdapter.Builder<Counter>()
-            .setData(counters)
+            .setDataSet(counters)
             .setViewHolder(getViewHolder())
             .build()
     }
@@ -73,7 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             .build()
     }
 
-    private fun navigateToSecondFirstFragment(item: Counter): Boolean {
+    private fun navigateToSecondFirstFragment(item: Counter): Boolean { //unused parameter - either remove bcs it's not needed or fix issue ??
         viewModel.navigateToSecondFirstFragment(requireActivity())
 
         return true

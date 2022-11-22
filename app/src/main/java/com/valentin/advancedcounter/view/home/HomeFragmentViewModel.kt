@@ -8,11 +8,10 @@ import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.model.repository.dataService.DataService
 import com.valentin.advancedcounter.model.repository.navService.NavService
-import com.valentin.advancedcounter.view.activity.MainActivity
 
 class HomeFragmentViewModel(
     private val dataService: DataService,
-    private val navService: NavService
+    private val navService: NavService,
 ) : ViewModel() {
 
     fun getCounters(): LiveData<MutableList<Counter>> {
@@ -27,11 +26,7 @@ class HomeFragmentViewModel(
         dataService.saveCountersAndPostValue(newArrayValue)
     }
 
-    fun setNavGraph(activity: MainActivity) {
-        navService.setNavMainActivityNavGraph(activity)
-    }
-
-    private fun navigateTo(resId: Int, activity: Activity) {
+    private fun navigateTo(resId: Int, activity: Activity) { //do not pass context/view as param into ViewModel ????
         navService.getNavControllerByActivity(activity).navigate(resId)
     }
 

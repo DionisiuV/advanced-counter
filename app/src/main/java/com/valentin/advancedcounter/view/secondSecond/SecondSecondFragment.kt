@@ -61,7 +61,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
 
     private fun getAdapter(counters: MutableList<Counter>): GenericAdapter<Counter> {
         return GenericAdapter.Builder<Counter>()
-            .setData(counters)
+            .setDataSet(counters)
             .setViewHolder(getViewHolder())
             .build()
     }
@@ -76,6 +76,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
 
     private fun navigateToDetailsFragment(item: Counter): Boolean {
         //set info to shared pref
+        //what shared prefs? - ?????
         val sharedPref = activity?.getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
         val sharedPrefEdit = sharedPref?.edit()
         sharedPrefEdit?.putString("clicks_amount", item.numberOfClicks.toString())?.apply()
