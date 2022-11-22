@@ -7,7 +7,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.AdvancedCounter"
-        android:name=".koinDI.BaseApplication">
+        android:name=".application.BaseApplication">
         <!-- exported: true - broadcast receiver can receive events sent by same or others applications -->
         <!-- exported: false - broadcast receiver can receive events sent by same application -->
         <activity
