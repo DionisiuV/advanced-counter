@@ -10,9 +10,9 @@ class BaseApplication : Application() {
         initKoinDI()
     }
 
-    private fun  initKoinDI() {
+    private fun initKoinDI() {
         startKoin {
-            modules(listOf(repositoryModule, viewModelModule ))
+            modules(listOf(repositoryModule, viewModelModule, networkModule))
         }
     }
 }

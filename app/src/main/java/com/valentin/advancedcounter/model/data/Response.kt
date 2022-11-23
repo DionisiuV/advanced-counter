@@ -5,3 +5,5 @@ sealed class Response<out T> {
     data class Error(val error: String) : Response<Nothing>()
     object Loading : Response<Nothing>()
 }
+
+data class MockApiDataResponse(val message: String)
