@@ -15,9 +15,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         setClicksAmountToTv()
+        clicksCounterEt.setOnClickListener { sendClicksAmount(Integer.parseInt(clicksCounterEt.text.toString())) }
     }
 
     private fun setClicksAmountToTv() {
         clicksCounterEt.text = viewModel.getCounter().numberOfClicks.toString()
+    }
+
+    private fun sendClicksAmount(clicks: Int) {
+        viewModel.sendClicksAmount(clicks)
     }
 }

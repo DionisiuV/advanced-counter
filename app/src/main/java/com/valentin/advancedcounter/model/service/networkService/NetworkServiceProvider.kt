@@ -2,33 +2,35 @@ package com.valentin.advancedcounter.model.service.networkService
 
 
 import android.util.Log
-import com.valentin.advancedcounter.model.data.MockApiDataResponse
 import com.valentin.advancedcounter.model.data.RequestModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetworkServiceProvider : NetworkService{
+class NetworkServiceProvider : NetworkService {
 
 
-    override fun getOkHttpClient(interceptor: Interceptor): OkHttpClient {
+    private fun getOkHttpClient(interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor { message -> Log.d("DEBUG_TAG_OK_HTTP", message) }.setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor(interceptor)
             .build()
     }
 
-    override fun getRetrofit(client: OkHttpClient): Retrofit {
+     private fun getRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(client)
-            .baseUrl("http://api.server.com")
+            .baseUrl("http://valentin-mock-api.com")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 
@@ -36,18 +38,19 @@ class NetworkServiceProvider : NetworkService{
         return getRetrofit(getOkHttpClient(MockInterceptor())).create(ApiService::class.java)
     }
 
-    fun addClicksAmount(clicksAmount: Int, onResult: (String?) -> Unit) {
-        val clicksAmountRequestModel = RequestModel(clicksAmount)
-        getMockClient().addClicksAmount(clicksAmountRequestModel).enqueue(object: Callback<MockApiDataResponse> {
-            override fun onFailure(call: Call<MockApiDataResponse>, t: Throwable) {
-                onResult(null)
-                Log.d("ANDROID_DEBUG_TAG", t.toString())
-            }
-            override fun onResponse(call: Call<MockApiDataResponse>, response: Response<MockApiDataResponse>) {
-                Log.d("ANDROID_DEBUG_TAG", "addClicksAmount() onResponse(): ${response.body().toString()}")
-                onResult(response.body().toString())
-            }
-        })
+    override fun sendClicksAmount(clicksAmount: Int) {
+        getMockClient()
+            .addClicksAmount(RequestModel(clicksAmount))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onError = { e ->
+                    Log.e("NETWORK_SERVICE_ERROR", "addClicksAmount: $e")
+                          },
+                onSuccess = { response ->
+                    Log.d("NETWORK_SERVICE_SUCCESS", response.message)
+                }
+            )
     }
 
 }

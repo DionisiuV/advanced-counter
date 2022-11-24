@@ -1,6 +1,7 @@
 package com.valentin.advancedcounter.model.service.navService
 
 
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.fragment.NavHostFragment
@@ -42,7 +43,7 @@ class MainActivityNavServiceProvider : MainActivityNavService {
         return getActivity().supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
     }
 
-    private fun getNavController(): NavController {
+    override fun getNavController(): NavController {
         return getNavHost().navController
     }
 

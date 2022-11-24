@@ -32,7 +32,7 @@ val viewModelModule = module {
 
     viewModel { SecondSecondFragmentViewModel(get(), get()) }
 
-    viewModel { DetailsFragmentViewModel(get()) }
+    viewModel { DetailsFragmentViewModel(get(), get()) }
 
     viewModel { MainActivityViewModel(get()) }
 

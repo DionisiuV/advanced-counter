@@ -23,6 +23,10 @@ class MainActivityViewModel(
         navigateTo(R.id.secondFirstFragment)
     }
 
+    fun goBack() {
+        navService.getNavController().navigateUp()
+    }
+
     private fun navigateTo(resId: Int) {
         navService.navigateTo(resId)
     }
