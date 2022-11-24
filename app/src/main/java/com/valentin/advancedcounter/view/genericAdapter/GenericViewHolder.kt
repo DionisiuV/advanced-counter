@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GenericViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun <T> bindDataToViewHolder(item: T, bindingInterface: GenericAdapterBindingInterface<T>, position: Int) {
-        return bindingInterface.bindDataToView(item, itemView, position)
+    fun <T> bindData(item: T, bindingInterface: GenericAdapterBindingInterface<T>, position: Int) {
+        return bindingInterface.bindData(item, itemView, position)
     }
 }

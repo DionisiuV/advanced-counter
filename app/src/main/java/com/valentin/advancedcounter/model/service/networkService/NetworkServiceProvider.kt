@@ -4,8 +4,6 @@ package com.valentin.advancedcounter.model.service.networkService
 import android.util.Log
 import com.valentin.advancedcounter.model.data.RequestModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
@@ -17,6 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkServiceProvider : NetworkService {
 
+    private fun getMockClient(): ApiService {
+        return getRetrofit(getOkHttpClient(MockInterceptor())).create(ApiService::class.java)
+    }
 
     private fun getOkHttpClient(interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
@@ -25,17 +26,13 @@ class NetworkServiceProvider : NetworkService {
             .build()
     }
 
-     private fun getRetrofit(client: OkHttpClient): Retrofit {
+    private fun getRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl("http://valentin-mock-api.com")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-    }
-
-    private fun getMockClient(): ApiService {
-        return getRetrofit(getOkHttpClient(MockInterceptor())).create(ApiService::class.java)
     }
 
     override fun sendClicksAmount(clicksAmount: Int) {
@@ -46,7 +43,7 @@ class NetworkServiceProvider : NetworkService {
             .subscribeBy(
                 onError = { e ->
                     Log.e("NETWORK_SERVICE_ERROR", "addClicksAmount: $e")
-                          },
+                },
                 onSuccess = { response ->
                     Log.d("NETWORK_SERVICE_SUCCESS", response.message)
                 }

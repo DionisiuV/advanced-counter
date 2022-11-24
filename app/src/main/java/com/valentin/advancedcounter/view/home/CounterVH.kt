@@ -13,9 +13,9 @@ class CounterVH private constructor() : GenericAdapterBindingInterface<Counter> 
     private var onLongClickEventListener: ((Counter) -> Boolean) = { false }
 
 
-    override fun bindDataToView(item: Counter, view: View, position: Int) {
-        view.clicksAmountTv.text = item.numberOfClicks.toString()//oops!! -> ?? make sense to have a function for this?
-        item.position = position
+    override fun bindData(item: Counter, view: View, position: Int) {
+        setItemToTv(item, view)
+        setItemPosition(item, position)
         setClickEvents(item, view)
     }
 
@@ -26,6 +26,14 @@ class CounterVH private constructor() : GenericAdapterBindingInterface<Counter> 
     private fun setClickEvents(item: Counter, itemView: View) {
         itemView.setOnClickListener { onClickEventListener(item) }
         itemView.setOnLongClickListener { onLongClickEventListener(item) }
+    }
+
+    private fun setItemPosition(item: Counter, position: Int) {
+        item.position = position
+    }
+
+    private fun setItemToTv(item: Counter, view: View) {
+        view.clicksAmountTv.text = item.numberOfClicks.toString()
     }
 
 
@@ -44,7 +52,6 @@ class CounterVH private constructor() : GenericAdapterBindingInterface<Counter> 
 
             return this
         }
-
 
         fun build(): CounterVH {
             return counterVH

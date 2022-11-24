@@ -15,7 +15,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         setClicksAmountToTv()
-        clicksCounterEt.setOnClickListener { sendClicksAmount(Integer.parseInt(clicksCounterEt.text.toString())) }
+        setClickActionOnClicksCounter()
     }
 
     private fun setClicksAmountToTv() {
@@ -24,5 +24,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun sendClicksAmount(clicks: Int) {
         viewModel.sendClicksAmount(clicks)
+    }
+
+    private fun setClickActionOnClicksCounter() {
+        clicksCounterEt.setOnClickListener { sendClicksAmount(Integer.parseInt(clicksCounterEt.text.toString())) }
     }
 }

@@ -6,7 +6,7 @@ import android.view.View
 //rename package
 interface GenericAdapterBindingInterface<T> {
 
-    fun bindDataToView(item: T, view: View, position: Int)
+    fun bindData(item: T, view: View, position: Int)
 
     fun getLayoutResId(): Int
 }

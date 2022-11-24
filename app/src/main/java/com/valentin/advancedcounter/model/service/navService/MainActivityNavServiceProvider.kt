@@ -1,7 +1,6 @@
 package com.valentin.advancedcounter.model.service.navService
 
 
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.fragment.NavHostFragment
@@ -17,7 +16,7 @@ class MainActivityNavServiceProvider : MainActivityNavService {
         if (shouldSetupNavigation())
             initNavService(activity)
         else
-            throw Exception("Navigation for MaiNActivity was already set up!. Mind your BL")
+            throw Exception("Navigation for MainActivity was already set up!. Mind your BL")
     }
 
     override fun getNavGraph(): Int {

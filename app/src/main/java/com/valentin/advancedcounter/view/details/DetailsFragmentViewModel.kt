@@ -1,5 +1,7 @@
 package com.valentin.advancedcounter.view.details
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.valentin.advancedcounter.model.data.Counter
 import com.valentin.advancedcounter.model.service.dataService.DataService

@@ -21,7 +21,7 @@ class GenericAdapter<T> private constructor() : RecyclerView.Adapter<GenericView
     }
 
     override fun onBindViewHolder(holder: GenericViewHolder, position: Int) {
-        holder.bindDataToViewHolder(dataSet[position], bindingInterface, position)
+        holder.bindData(dataSet[position], bindingInterface, position)
     }
 
     override fun getItemCount(): Int {

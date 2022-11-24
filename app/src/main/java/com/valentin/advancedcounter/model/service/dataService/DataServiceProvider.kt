@@ -18,11 +18,11 @@ class DataServiceProvider : DataService {
     }
 
     override fun incrementNumberOfClicksForCounterAtPositionAndPostValue(position: Int) {
-        val newArrayValue = getCounters().value!!
+        val updatedCounters = getCounters().value!!
 
-        newArrayValue[position].numberOfClicks++
+        updatedCounters[position].numberOfClicks++
 
-        providedCounters.postValue(newArrayValue)
+        providedCounters.postValue(updatedCounters)
     }
 
     override fun saveCounterToBeDisplayed(counter: Counter) {

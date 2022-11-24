@@ -15,7 +15,7 @@ class CounterVHL private constructor() : GenericAdapterBindingInterface<Counter>
     private var onLongClickEventListener: ((Counter) -> Boolean) = { false }
 
 
-    override fun bindDataToView(item: Counter, view: View, position: Int) {
+    override fun bindData(item: Counter, view: View, position: Int) {
         view.clicksAmountTv.text = item.numberOfClicks.toString()
         item.position = position
 

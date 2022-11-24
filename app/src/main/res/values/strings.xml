@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Advanced Counter</string>
+    <string name="splash_screen_tv_value">Redirecting to main activity in</string>
+    <string name="fragment_second_first_tv_value">Hello World</string>
+    <string name="fragment_second_first_btn_value">Go to fragment 2.1</string>
+    <string name="bottom_menu_first_btn_value">Home F.</string>
+    <string name="bottom_menu_second_btn_value">Second F.</string>
 </resources>

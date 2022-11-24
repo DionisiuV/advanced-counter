@@ -1,8 +1,7 @@
 package com.valentin.advancedcounter.model.service.networkService
 
-import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.valentin.advancedcounter.model.data.RequestModel
 import okhttp3.Interceptor
@@ -14,24 +13,20 @@ import okio.Buffer
 
 
 class MockInterceptor : Interceptor {
+
     override fun intercept(chain: Interceptor.Chain): Response {
 
-        val buffer = Buffer()
-        chain.request().body?.writeTo(buffer)
-        val jsonRequestBody = buffer.readUtf8()
-        val element: JsonElement = JsonParser.parseString(jsonRequestBody)
-        val result = element.asJsonObject
-        val objectRequest = Gson().fromJson(result, RequestModel::class.java)
-
+        //i need to intercept data so i can send back response with clicks amount attached
+        val requestBodyBuffer = Buffer()
+        chain.request().body?.writeTo(requestBodyBuffer)
+        val requestModel = parseRequest(requestBodyBuffer)
 
         val uri = chain.request().url.toUri().toString()
         val responseString = when {
-            uri.contains("data") -> getResponseFromMockApi
-            uri.contains("amount") -> printResponseFromMockApi(objectRequest.clicksAmount)
+            uri.contains("clicks-amount") -> printResponseFromMockApi(requestModel.clicksAmount)
+            uri.endsWith("/") -> getResponseFromMockApi
             else -> throw Exception("not valid route")
         }
-
-
 
         return Response.Builder()
             .request(chain.request())
@@ -45,12 +40,17 @@ class MockInterceptor : Interceptor {
 }
 
 const val getResponseFromMockApi = """
-        {"message": "Mocked api reached"}
+        {"message": "Mock api reached"}
         """
 
-private fun printResponseFromMockApi(s: Int): String {
+private fun printResponseFromMockApi(clicksAmount: Int): String {
     return """
-        {"message": "The element clicked $s times was Registered"}
+        {"message": "The element clicked $clicksAmount times was Registered"}
         """
+}
+
+private fun parseRequest(requestBody: Buffer): RequestModel {
+    val jsonObjectRequestBody: JsonObject = JsonParser.parseString(requestBody.readUtf8()).asJsonObject
+    return Gson().fromJson(jsonObjectRequestBody, RequestModel::class.java)
 }
 

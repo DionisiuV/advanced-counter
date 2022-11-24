@@ -26,7 +26,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
     }
 
     private fun updateRecyclerViewWithLatestChanges(counters: MutableList<Counter>) {
-        if (isAdapterNotAttached())
+        if (adapterIsNotAttached())
             initAdapter(counters)
         else
             notifyAdapterAboutChanges(counters)
@@ -41,7 +41,7 @@ class SecondSecondFragment : Fragment(R.layout.fragment_second_second) {
         counterRvLinear.adapter?.notifyItemRangeChanged(0, counters.size)
     }
 
-    private fun isAdapterNotAttached(): Boolean {
+    private fun adapterIsNotAttached(): Boolean {
         return counterRvLinear.adapter == null
     }
 

@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.data.Counter
-import com.valentin.advancedcounter.model.service.networkService.NetworkService
-import com.valentin.advancedcounter.model.service.networkService.NetworkServiceProvider
 import com.valentin.advancedcounter.view.genericAdapter.GenericAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.java.KoinJavaComponent.inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -29,7 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun updateRecyclerViewWithLatestChanges(counters: MutableList<Counter>) {
-        if (isAdapterNotAttached())
+        if (adapterIsNotAttached())
             initAdapter(counters)
         else
             notifyAdapterAboutChanges(counters)
@@ -44,7 +41,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         counterRv.adapter?.notifyItemRangeChanged(0, counters.size)
     }
 
-    private fun isAdapterNotAttached(): Boolean {
+    private fun adapterIsNotAttached(): Boolean {
         return counterRv.adapter == null
     }
 

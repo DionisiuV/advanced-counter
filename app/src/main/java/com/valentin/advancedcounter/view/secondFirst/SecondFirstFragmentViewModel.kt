@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.valentin.advancedcounter.R
 import com.valentin.advancedcounter.model.service.navService.MainActivityNavService
 
-class SecondFragmentViewModel(
+class SecondFirstFragmentViewModel(
     private val navService: MainActivityNavService
 ) : ViewModel() {
 

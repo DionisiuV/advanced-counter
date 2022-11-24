@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.valentin.advancedcounter.view.home.HomeFragment"
@@ -46,5 +47,6 @@
         android:name="com.valentin.advancedcounter.view.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
+
 
 </navigation>

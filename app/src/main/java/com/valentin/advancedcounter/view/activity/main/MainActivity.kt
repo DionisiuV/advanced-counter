@@ -10,23 +10,17 @@ import com.valentin.advancedcounter.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewModel: MainActivityViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                viewModel.goBack()
-            }
-        })
 
         initNavigation()
         setBottomMenu()
+        setBackFunctionality()
     }
 
     private fun initNavigation() {
@@ -45,5 +39,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         return true
+    }
+
+    private fun setBackFunctionality() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.goBack()
+            }
+        })
     }
 }
